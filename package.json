@@ -1,0 +1,22 @@
+{
+  "name": "alkis-shoppingcart",
+  "version": "1.0.0",
+  "description": "simple one page html(javascript app resembling a ashopping cart",
+  "main": "materialize.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alkiwrites/Alkis-ShoppingCart.git"
+  },
+  "author": "Alki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alkiwrites/Alkis-ShoppingCart/issues"
+  },
+  "homepage": "https://github.com/alkiwrites/Alkis-ShoppingCart#readme",
+  "dependencies": {
+    "materialize": "^1.0.0"
+  }
+}

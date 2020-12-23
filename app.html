@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Alkis shopping cart</title>
+
+    <link rel="stylesheet" href="materialize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+</head>
+<body>
+
+    <style>
+
+
+     .sidenav {
+          background-color: #fff;
+          overflow: scroll;
+     }
+
+     .wrap {
+         height: 60%;
+         max-height: 60%;
+         border-bottom: 1px solid #000;
+         background-color: #2c9bd02e;
+         overflow: auto;
+     }
+
+     .data {
+         padding: 15px 15px;
+         text-align: center;
+         position: relative;
+         margin : 0 auto;
+         font-size: 1.12rem;
+     }
+
+      .pic {
+          width: 90%;
+          margin : 0 auto;
+          display : flex;
+          height: 150px;
+      }
+      .titulo {
+           background-color: #4449;
+           text-shadow: 1px 1px #000;
+           width: 100%;
+           margin: 0;
+            height: 24px;
+            max-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+           
+      }   
+      .titulo > h3 {
+          font-size: 1.23rem;
+          padding: 0;
+          margin : 0;
+      }
+    </style>
+
+
+   <!-- el side nav -->
+   <nav class="container"> 
+             <h5>Alkis Shopping Cart</h5>
+   </nav>
+
+  <div id="slide-out" class="sidenav">
+    <div class="wrap">
+    </div>
+
+    <div class="data row">
+            <div class="col">
+                    <span class="total">0</span>
+                    <span> $USD </span>
+            </div>
+    </div>
+
+  </div>
+
+
+   <div id="controler" class="container">
+      <a href="#" data-target="slide-out" class="sidenav-trigger btn btn-primary">
+        <i class="large material-icons">add_shopping_cart</i>
+      </a>
+   </div>
+
+    <secction id="pd">
+       
+        <div id="panel" class="row container">
+
+             <div class="s12 m4 l4 col">
+                <div class="card item">
+                        <div class="card-image">
+                            <img class="pic" src="https://images-na.ssl-images-amazon.com/images/I/91Erb6gHeIL._AC_SL1500_.jpg" width="70%" alt="pic">
+                            <span class="card-title titulo">
+                                <h3>nombre_pd1</h3>
+                            </span>
+                        </div>
+                        <div class="card-content">
+                            <p>Precio : <span class="precio">1.00</span>$</p>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-primary btn-large add" id="add">Add</button>
+                        </div>
+                 </div>  
+                 <!-- find card item -->
+             </div>
+             <!-- fin columna -->
+
+             <div class="s12 m4 l4 col">
+                <div class="card item">
+                        <div class="card-image">
+                            <img class="pic" src="https://images-na.ssl-images-amazon.com/images/I/91Erb6gHeIL._AC_SL1500_.jpg" width="70%" alt="pic">
+                            <span class="card-title titulo">
+                                <h3>nombre_pd2</h3>
+                            </span>
+                        </div>
+                        <div class="card-content">
+                            <p>Precio : <span class="precio">2.00</span>$</p>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-primary btn-large add" id="add">Add</button>
+                        </div>
+                 </div>  
+                 <!-- find card item -->
+             </div>
+             <!-- fin columna -->
+
+             <div class="s12 m4 l4 col">
+                <div class="card item">
+                        <div class="card-image">
+                            <img class="pic" src="https://images-na.ssl-images-amazon.com/images/I/91Erb6gHeIL._AC_SL1500_.jpg" width="70%" alt="pic">
+                            <span class="card-title titulo">
+                                <h3 class="nombre">nombre_pd3</h3>
+                            </span>
+                        </div>
+                        <div class="card-content">
+                            <p>Precio : <span class="precio">3.00</span>$</p>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-primary btn-large add" id="add">Add</button>
+                        </div>
+                 </div>  
+                 <!-- find card item -->
+             </div>
+             <!-- fin columna -->
+        </div>
+
+    </secction>
+
+
+    <script src="materialize.js"></script>
+
+    <script>
+
+        // el hook
+        let doc = document;
+
+        // trigger para isntanciar la sidenav
+        doc.addEventListener('DOMContentLoaded', function() {
+                var elems = doc.querySelectorAll('.sidenav');
+                var instances = M.Sidenav.init(elems);
+        });
+
+
+        // hook al boton principal
+        let add = doc.querySelectorAll('.add');
+        let total = doc.querySelector('.total');
+        var carrito = []; // el carrito
+
+         // por cada elemento co la clase add
+        add.forEach( (ele,index) => {
+
+                     // event to every elements click 
+                     ele.addEventListener('click', ()=>{
+                         // loshooks interiores
+                         let item = ele.closest('.item');
+                          // un objeto con lo importante
+                          let data =  {
+                             pic    :  item.querySelector('.pic'),
+                             titulo : item.querySelector('.titulo'),
+                             precio : item.querySelector('.precio')
+                         };
+                         
+                         // hook sidenav
+                         let sidenav = doc.querySelector('.sidenav');
+                         let wrap    = doc.querySelector('.wrap');
+                         // intance of sidenav
+                         var hookSideNav = M.Sidenav.getInstance(sidenav);
+                        //parseamos 
+                         let iNombre = data.titulo.textContent.trim();
+ 
+                        // chekeamos si esta en el array el nombre
+                         switch(carrito.indexOf( iNombre )) {
+                                           case -1: // si no esta
+
+                                                        // first div
+                                                        let divPic =  doc.createElement('div');
+                                                        divPic.classList.add('col' , 's5' , 'm5' , 'l5');
+                                                        // seocnd div
+                                                        let divInfo = doc.createElement('div');
+                                                        divInfo.classList.add('col' , 's7' , 'm7' , 'l7');
+
+                                                        // la pic
+                                                        let pic = doc.createElement('img');
+                                                        pic.src = data.pic.src; // change src
+                                                        pic.alt = 'pic';
+                                                        pic.style.width = '90%'; // add styles
+                                                        pic.style.height = '80%';
+                                                        pic.style.margin = '5px 10px';
+                                                        // el titulo
+                                                        let titulo = doc.createElement('p');
+                                                        titulo.textContent = data.titulo.textContent.trim();
+                                                        // el precio
+                                                        let precio = doc.createElement('span');
+                                                        precio.textContent = data.precio.textContent + '$USD';
+                                                        // el divsor 
+                                                        let divider = doc.createElement('div');
+                                                        divider.classList.add('divider');
+
+                                                       // agregamos a als divs
+                                                        divPic.appendChild(pic);
+                                                        divInfo.appendChild(titulo);
+                                                        divInfo.appendChild(precio);
+
+                                                        // creamos la row 
+                                                        let row = doc.createElement('div');
+                                                        row.classList.add('row'); // add class
+                                                        row.appendChild( divPic); // append
+                                                        row.appendChild( divInfo ); 
+
+                                                      // add to the nav
+                                                        wrap.append(row);
+                                                        wrap.append(divider);
+
+                                                        // update total
+                                                        total.textContent = parseInt(total.textContent) + parseInt(data.precio.textContent);
+                                                        carrito.push(titulo.textContent);  // add cart 
+                                                        hookSideNav.open(); // open
+                                           break;
+                                           default :   // se otra manera
+                                            //   window.alert('Item in cart"');
+                                             hookSideNav.open();
+                           }
+                          // Creamon nuev html
+                     });
+        });
+     </script>
+     
+    
+</body>
+</html>
